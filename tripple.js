@@ -1,6 +1,6 @@
-const firsr = "0";
+const first = "0";
 const second = true;
-if (firsr == second) {
+if (first == second) {
   console.log("value is equal");
 } else {
   console.log("value are not same");
