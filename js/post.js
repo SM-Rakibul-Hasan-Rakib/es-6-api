@@ -8,7 +8,7 @@ function poster(data) {
   for (const user of data) {
     console.log(user);
     const li = document.createElement("li");
-    li.innerText = user.name;
+    li.innerText = user.postId;
     ul.appendChild(li);
   }
   // for (const user of data) {
