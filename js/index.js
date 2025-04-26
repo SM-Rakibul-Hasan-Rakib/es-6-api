@@ -1,9 +1,9 @@
 function loadUata2() {
-  fetch("https://jsonplaceholder.typicode.com/comments")
+  fetch("https://admin.refabry.com/api/all/product/get")
     .then((res) => res.json())
-    .then((data) => displayUser2(data));
+    .then((rakib) => console.log(rakib));
 }
-
+// loadUata2();
 function displayUser2(data) {
   const ul = document.getElementById("users-list");
   for (const user of data) {
