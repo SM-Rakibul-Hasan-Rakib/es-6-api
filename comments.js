@@ -6,7 +6,11 @@ const loadComments = () => {
 };
 
 const loadComments2 = async () => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
-  const data = await res.json();
-  console.log(data);
+  try {
+    const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+    const data = await res.json();
+    console.log(data);
+  } catch (error) {
+    console.log("data load error");
+  }
 };
