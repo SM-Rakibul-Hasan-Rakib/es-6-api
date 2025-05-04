@@ -1,7 +1,7 @@
 // আইফোন সংক্রান্ত ডেটা লোড করার জন্য একটি অ্যাসিনক্রোনাস ফাংশন
 const loadPhone = async () => {
   const res = await fetch(
-    "https://openapi.programming-hero.com/api/phones?search=iphone"
+    `https://openapi.programming-hero.com/api/phones?search=samsung`
   );
   const data = await res.json();
   const phones = data.data;
@@ -18,7 +18,7 @@ const displayPhones = (phones) => {
   phones.forEach((phone) => {
     // একটি div তৈরি করা হচ্ছে
     const phoneCard = document.createElement("div");
-    phoneCard.classList = `card bg-gray-100 w-96 shadow-sm`;
+    phoneCard.classList = `card bg-gray-100 p-4 shadow-sm`;
 
     // HTML ইনার তৈরি করা হচ্ছে ফোনের তথ্য দিয়ে
     phoneCard.innerHTML = `
@@ -38,6 +38,13 @@ const displayPhones = (phones) => {
     // তৈরি করা কার্ডটি কন্টেইনারে যোগ করা হচ্ছে
     phoneContainer.appendChild(phoneCard);
   });
+};
+
+// handleSearch button
+const handleSearch = () => {
+  const searchField = document.getElementById("search-field");
+  const searchText = searchField.value;
+  console.log(searchText);
 };
 
 // শুরুতেই ফোন লোড করার জন্য ফাংশন কল করা হচ্ছে
