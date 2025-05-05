@@ -54,18 +54,19 @@ const displayPhones = (phones) => {
 
 // handleSearch button
 const handleSearch = () => {
+  toggleLOadingSpinner(true);
   const searchField = document.getElementById("search-field");
   const searchText = searchField.value;
   console.log(searchText);
   loadPhone(searchText);
 };
 // handle search recap
-const handleSearch2 = () => {
-  toggleLOadingSpinner(true);
-  const searchField = document.getElementById("search-field2");
-  const searchText = searchField.value;
-  loadPhone(searchText);
-};
+// const handleSearch2 = () => {
+//   toggleLOadingSpinner(true);
+//   const searchField = document.getElementById("search-field2");
+//   const searchText = searchField.value;
+//   loadPhone(searchText);
+// };
 
 const toggleLOadingSpinner = (isLoading) => {
   const loadingSpinner = document.getElementById("loading-spinner");
