@@ -45,7 +45,7 @@ const displayPhones = (phones, isShowAll) => {
         <p>${phone.phone_name}</p>
         <p>${phone.slug}</p>
         <div class="card-actions justify-center">
-          <button onclick = "" class="btn btn-primary w-full mt-3">Show Details</button>
+          <button onclick = "handleShowDetails('${phone.slug}')" class="btn btn-primary w-full mt-3">Show Details</button>
         </div>
       </div>
     `;
@@ -55,6 +55,16 @@ const displayPhones = (phones, isShowAll) => {
   });
   // hide loading spinner
   toggleLOadingSpinner(false);
+};
+
+const handleShowDetails = async (id) => {
+  console.log("show details", id);
+  // load single phone data
+  const res = await fetch(
+    `https://openapi.programming-hero.com/api/phone${id}`
+  );
+  const data = await res.json();
+  console.log(data);
 };
 
 // handleSearch button
@@ -86,5 +96,6 @@ const toggleLOadingSpinner = (isLoading) => {
 const handleShowAll = () => {
   handleSearch(true);
 };
+
 // শুরুতেই ফোন লোড করার জন্য ফাংশন কল করা হচ্ছে
 // loadPhone();
