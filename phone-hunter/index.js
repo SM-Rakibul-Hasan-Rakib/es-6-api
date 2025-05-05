@@ -1,5 +1,5 @@
 // আইফোন সংক্রান্ত ডেটা লোড করার জন্য একটি অ্যাসিনক্রোনাস ফাংশন
-const loadPhone = async (searchText) => {
+const loadPhone = async (searchText, isShowAll) => {
   const res = await fetch(
     `https://openapi.programming-hero.com/api/phones?search=${searchText}`
   );
@@ -7,20 +7,25 @@ const loadPhone = async (searchText) => {
   const phones = data.data;
 
   // ফোনগুলো দেখানোর ফাংশনে পাঠানো হচ্ছে
-  displayPhones(phones);
+  displayPhones(phones, isShowAll);
 };
 
 // ফোনগুলো HTML-এ দেখানোর জন্য এই ফাংশন
-const displayPhones = (phones) => {
+const displayPhones = (phones, isShowAll) => {
   const phoneContainer = document.getElementById("phone-container");
   // clear phone container cards before adding new cards
   phoneContainer.textContent = "";
   // display show all button if there are more then 12 phones
   const showAllContainer = document.getElementById("show-all-container");
-  if (phones.length > 12) {
+  if (phones.length > 12 && !isShowAll) {
     showAllContainer.classList.remove("hidden");
   } else {
     showAllContainer.classList.add("hidden");
+  }
+  // display only first 12 phones if not show all
+  console.log("is show all", isShowAll);
+  if (!isShowAll) {
+    phones = phones.slice(0, 12);
   }
   // display only first 12 phones
   phones = phones.slice(0, 12);
@@ -39,8 +44,8 @@ const displayPhones = (phones) => {
         <h2 class="card-title">${phone.brand}</h2>
         <p>${phone.phone_name}</p>
         <p>${phone.slug}</p>
-        <div class="card-actions justify-end">
-          <button class="btn btn-primary w-full mt-3">Buy Now</button>
+        <div class="card-actions justify-center">
+          <button onclick = "" class="btn btn-primary w-full mt-3">Show Details</button>
         </div>
       </div>
     `;
@@ -53,12 +58,12 @@ const displayPhones = (phones) => {
 };
 
 // handleSearch button
-const handleSearch = () => {
+const handleSearch = (isShowAll) => {
   toggleLOadingSpinner(true);
   const searchField = document.getElementById("search-field");
   const searchText = searchField.value;
   console.log(searchText);
-  loadPhone(searchText);
+  loadPhone(searchText, isShowAll);
 };
 // handle search recap
 // const handleSearch2 = () => {
@@ -75,6 +80,11 @@ const toggleLOadingSpinner = (isLoading) => {
   } else {
     loadingSpinner.classList.add("hidden");
   }
+};
+
+// handleShowAll
+const handleShowAll = () => {
+  handleSearch(true);
 };
 // শুরুতেই ফোন লোড করার জন্য ফাংশন কল করা হচ্ছে
 // loadPhone();
