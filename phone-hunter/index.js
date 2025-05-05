@@ -13,6 +13,8 @@ const loadPhone = async (searchText) => {
 // ফোনগুলো HTML-এ দেখানোর জন্য এই ফাংশন
 const displayPhones = (phones) => {
   const phoneContainer = document.getElementById("phone-container");
+  // clear phone container cards before adding new cards
+  phoneContainer.textContent = "";
 
   // প্রতিটি ফোনের জন্য একটি কার্ড তৈরি করে কন্টেইনারে যোগ করা হচ্ছে
   phones.forEach((phone) => {
