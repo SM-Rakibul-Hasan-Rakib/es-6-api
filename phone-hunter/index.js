@@ -1,5 +1,5 @@
 // আইফোন সংক্রান্ত ডেটা লোড করার জন্য একটি অ্যাসিনক্রোনাস ফাংশন
-const loadPhone = async (searchText, isShowAll) => {
+const loadPhone = async (searchText = "13", isShowAll) => {
   const res = await fetch(
     `https://openapi.programming-hero.com/api/phones?search=${searchText}`
   );
@@ -23,7 +23,7 @@ const displayPhones = (phones, isShowAll) => {
     showAllContainer.classList.add("hidden");
   }
   // display only first 12 phones if not show all
-  console.log("is show all", isShowAll);
+  // console.log("is show all", isShowAll);
   if (!isShowAll) {
     phones = phones.slice(0, 12);
   }
@@ -45,7 +45,8 @@ const displayPhones = (phones, isShowAll) => {
         <p>${phone.phone_name}</p>
         <p>${phone.slug}</p>
         <div class="card-actions justify-center">
-          <button onclick = "handleShowDetails('${phone.slug}')" class="btn btn-primary w-full mt-3">Show Details</button>
+          <button onclick = "handleShowDetails('${phone.slug}');
+          " class="btn btn-primary w-full mt-3">Show Details</button>
         </div>
       </div>
     `;
@@ -58,13 +59,22 @@ const displayPhones = (phones, isShowAll) => {
 };
 
 const handleShowDetails = async (id) => {
-  console.log("show details", id);
+  // console.log("show details", id);
   // load single phone data
   const res = await fetch(
     `https://openapi.programming-hero.com/api/phone${id}`
   );
   const data = await res.json();
   console.log(data);
+
+  showPhoneDetails(data);
+};
+
+const showPhoneDetails = (phone) => {
+  const phoneName = document.getElementById("phone-name");
+  phoneName.innerText = phone.name;
+  // show modal
+  show_details_modal.showModal();
 };
 
 // handleSearch button
@@ -98,4 +108,4 @@ const handleShowAll = () => {
 };
 
 // শুরুতেই ফোন লোড করার জন্য ফাংশন কল করা হচ্ছে
-// loadPhone();
+loadPhone();
